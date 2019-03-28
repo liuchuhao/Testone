@@ -5,9 +5,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="开始聊天"
+        android:id="@+id/start_activity_chat"/>
+    <Button
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button 1"
+        android:text="恋爱目标"
         android:id="@+id/button1"/>
 </LinearLayout>

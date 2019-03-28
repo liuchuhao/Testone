@@ -1,6 +1,8 @@
 package life.lch.testone;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,14 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: ");
         Button button=findViewById(R.id.button1);
+        Button startChatButton=findViewById(R.id.start_activity_chat);
+        startChatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,ChatActivity.class);
+                startActivity(intent);
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,8 +56,26 @@ public class MainActivity extends BaseActivity {
                 Intent intent=new Intent("life.lch.testone.FORCE_OFFLINE");
                 sendBroadcast(intent);
                 break;
-                default:
-                    break;
+            case R.id.exit:
+                AlertDialog.Builder dialog=new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("肖大宝：");
+                dialog.setMessage("您真的要离开吗？");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("是的", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ActivityCollector.finishAll();
+                    }
+                });
+                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                dialog.show();
+            default:
+                break;
         }
         return true;
     }
