@@ -9,5 +9,8 @@
 <mapping class="life.lch.testone.Chat">
 
 </mapping>
+<mapping class="life.lch.testone.LogData">
+
+</mapping>
     </list>
 </litepal>

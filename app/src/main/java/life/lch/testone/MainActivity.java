@@ -2,6 +2,10 @@ package life.lch.testone;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,29 +14,71 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
+
+    private RadioButton radioButtonboy;
+    private RadioButton radioButtongirl;
+    private SharedPreferences.Editor editor;
+    private SharedPreferences checkSex;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate: ");
+        radioButtonboy=findViewById(R.id.chat_boy);
+        radioButtongirl=findViewById(R.id.chat_girl);
+        checkSex=PreferenceManager.getDefaultSharedPreferences(this);
+
+        Boolean isGirl=checkSex.getBoolean("isGirl",false);
+        if (isGirl){
+            radioButtongirl.setChecked(true);
+        }
+
+
+        //设置随机语录
         Button button=findViewById(R.id.button1);
+        Button button2=findViewById(R.id.luv_log);
         Button startChatButton=findViewById(R.id.start_activity_chat);
         startChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,ChatActivity.class);
-                startActivity(intent);
+                editor=checkSex.edit();
+
+                if (radioButtonboy.isChecked()){
+                    editor.putBoolean("isGirl",false);
+                    editor.apply();
+                    ChatActivity.actionStart(MainActivity.this,true);
+                }
+                if (radioButtongirl.isChecked()){
+                    editor.putBoolean("isGirl",true);
+                    editor.apply();
+                    ChatActivity.actionStart(MainActivity.this,false);
+
+                }
             }
         });
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent("life.lch.testone.ACTION_START");
-                intent.addCategory("life.lch.testone.MY");
+               Intent intent=new Intent(MainActivity.this,SecondActivity.class);
+               startActivity(intent);
+        }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,LuvLog.class);
                 startActivity(intent);
             }
         });
@@ -58,7 +104,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.exit:
                 AlertDialog.Builder dialog=new AlertDialog.Builder(MainActivity.this);
-                dialog.setTitle("肖大宝：");
+                dialog.setTitle("提示：");
                 dialog.setMessage("您真的要离开吗？");
                 dialog.setCancelable(false);
                 dialog.setPositiveButton("是的", new DialogInterface.OnClickListener() {
@@ -78,5 +124,47 @@ public class MainActivity extends BaseActivity {
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        //模拟Home键
+        Intent intent=new Intent(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
+    public String load(){
+        FileInputStream in=null;
+        BufferedReader reader=null;
+        StringBuilder stringBuilder=new StringBuilder();
+        try{
+            in=openFileInput("data");
+            reader=new BufferedReader(new InputStreamReader(in));
+            String line="";
+            while ((line=reader.readLine())!=null){
+                stringBuilder.append(line);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if (reader!=null){
+                try{
+                    reader.close();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    protected void onResume() {
+        TextView target_name=findViewById(R.id.target_name);
+        target_name.setText(load());
+        TextView luvLetter=findViewById(R.id.talk_Something);
+        luvLetter.setText(new RandomLuvLetter().getLuvLuvLetter());
+        super.onResume();
     }
 }

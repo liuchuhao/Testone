@@ -3,17 +3,89 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        >
+        <TextView
+            android:layout_marginStart="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="对象选择："/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <RadioButton
+                android:layout_marginStart="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:id="@+id/chat_boy"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="男孩"/>
+            <RadioButton
+                android:layout_marginStart="30sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chat_girl"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="女孩"/>
+        </RadioGroup>
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="在线陪聊"
+        android:id="@+id/start_activity_chat"/>
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="开始聊天"
-        android:id="@+id/start_activity_chat"/>
-    <Button
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="恋爱目标"
+        android:text="设置目标"
         android:id="@+id/button1"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="撰写日志"
+        android:id="@+id/luv_log"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:paddingStart="10sp"
+            android:id="@+id/target_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="50sp"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:paddingStart="30sp"
+            android:paddingEnd="30sp"
+            android:layout_gravity="center"
+            android:id="@+id/talk_Something"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10sp"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="20sp" />
+    </LinearLayout>
 </LinearLayout>

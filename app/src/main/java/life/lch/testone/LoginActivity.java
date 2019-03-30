@@ -42,7 +42,7 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View view) {
                 String account=accountEdit.getText().toString();
                 String password=accountPassword.getText().toString();
-                if (account.equals("admin")&password.equals("admin")){
+                if (account.equals("520")&password.equals("5201314")){
                     editor=sRead.edit();
                     if (rememberPassword.isChecked()){
                         editor.putBoolean("remember_password",true);
