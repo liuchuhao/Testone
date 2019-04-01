@@ -12,7 +12,9 @@
         android:roundIcon="@drawable/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Writelog"/>
+        <activity android:name=".QQnumber"
+            android:label="QQ号码配对"/>
+        <activity android:name=".Writelog" />
         <activity android:name=".LuvLog" />
         <activity android:name=".MainActivity" />
         <activity

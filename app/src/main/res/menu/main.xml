@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item
-    android:id="@+id/add_item"
-    android:title="Add"/>
+    <item
+        android:id="@+id/give_money"
+        android:title="打赏"/>
     <item
         android:id="@+id/remove_item"
         android:title="注销"/>

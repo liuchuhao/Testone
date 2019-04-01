@@ -7,14 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
         >
+
         <TextView
-            android:layout_marginStart="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="对象选择："/>
+            android:layout_marginStart="20sp"
+            android:text="对象选择："
+            />
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,20 +49,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+
         android:text="在线陪聊"
         android:id="@+id/start_activity_chat"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="人工智能陪你聊天，告别孤独！"
+        android:textStyle="italic" />
     <Button
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="设置目标"
         android:id="@+id/button1"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="选择一个目标，我将会用半生灵力为你加持"
+        android:textStyle="italic" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="撰写日志"
+        android:text="撰写日记"
         android:id="@+id/luv_log"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="天天写日志，记录奇迹的发生"
+        android:textStyle="italic" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="爱情配对"
+        android:id="@+id/QQ_number_P"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="测测你和TA的缘分有多少？"
+        android:textStyle="italic" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -3,6 +3,7 @@ package life.lch.testone;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
@@ -26,7 +27,7 @@ import java.io.InputStreamReader;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
-
+    private InitSoundPool initSoundPool;
     private RadioButton radioButtonboy;
     private RadioButton radioButtongirl;
     private SharedPreferences.Editor editor;
@@ -35,6 +36,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initSoundPool = new InitSoundPool(this);
         radioButtonboy=findViewById(R.id.chat_boy);
         radioButtongirl=findViewById(R.id.chat_girl);
         checkSex=PreferenceManager.getDefaultSharedPreferences(this);
@@ -48,10 +50,20 @@ public class MainActivity extends BaseActivity {
         //设置随机语录
         Button button=findViewById(R.id.button1);
         Button button2=findViewById(R.id.luv_log);
+        Button button3=findViewById(R.id.QQ_number_P);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initSoundPool.playSound(1, 0);
+                Intent intent=new Intent(MainActivity.this,QQnumber.class);
+                startActivity(intent);
+            }
+        });
         Button startChatButton=findViewById(R.id.start_activity_chat);
         startChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                initSoundPool.playSound(1, 0);
                 editor=checkSex.edit();
 
                 if (radioButtonboy.isChecked()){
@@ -71,6 +83,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onClick(View view) {
+                initSoundPool.playSound(1, 0);
                Intent intent=new Intent(MainActivity.this,SecondActivity.class);
                startActivity(intent);
         }
@@ -78,6 +91,7 @@ public class MainActivity extends BaseActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                initSoundPool.playSound(1, 0);
                 Intent intent=new Intent(MainActivity.this,LuvLog.class);
                 startActivity(intent);
             }
@@ -95,8 +109,12 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.add_item:
-                Toast.makeText(this,"You Clicked Add",Toast.LENGTH_SHORT).show();
+            case R.id.give_money:
+                Intent intent1=new Intent();
+                intent1.setAction("android.intent.action.VIEW");
+                Uri uri=Uri.parse("https://qr.alipay.com/fkx08749jhfkdxflu4hovf2");
+                intent1.setData(uri);
+                startActivity(intent1);
                 break;
             case R.id.remove_item:
                 Intent intent=new Intent("life.lch.testone.FORCE_OFFLINE");

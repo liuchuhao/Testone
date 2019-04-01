@@ -145,7 +145,7 @@ public class ChatActivity extends BaseActivity{
 
         if (!isBoy==before){
             DataSupport.deleteAll(Chat.class);
-        }
+        }//判断是否切换性别
         editor=sRead.edit();
         editor.putBoolean("isBoy",isBoy);
         editor.apply();

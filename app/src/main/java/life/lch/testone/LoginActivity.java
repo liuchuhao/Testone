@@ -22,6 +22,11 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //防止重新加载登录页面
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            finish();
+            return;
+        }
         sRead= PreferenceManager.getDefaultSharedPreferences(this);
         accountEdit=findViewById(R.id.account);
         accountPassword=findViewById(R.id.password);
